@@ -63,7 +63,7 @@ The have a list of tasks and can, at any time, add a new one, delete one or sort
       then press "Add new task"</span>
     <br /><br />
  
-    <input type="text" id="newTask" />
+    <input type="text" id="newTask" onchange="readText"/>
     <input type="button" value="Add New Task" id="addTaskButton" onclick="addNewTask" />
 
     <!-- EXERCISE 3
@@ -117,11 +117,15 @@ The have a list of tasks and can, at any time, add a new one, delete one or sort
            addTaskButton.addEventListener('click', addNewTask); //check
 
 
-          function addNewTask(){
+           function readText() {
+            let taskTextBox = document.getElementById(newTask).value;
+          
+           console.log(taskTextBox)
 
-          let taskTextBox = document.getElementById(newTask);
-          innerText = taskTextBox.toString
-           console.log(innerText)
+           }
+
+
+          function addNewTask(){
           //  text input into text box on page
 
             let newListItem = document.createElement("li")
