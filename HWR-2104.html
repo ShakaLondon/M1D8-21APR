@@ -10,47 +10,54 @@ ASSIGNMENT TOPIC
 You are building a task list site.
 The have a list of tasks and can, at any time, add a new one, delete one or sort the whole bunch of them
 -->
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- sets up setting for the vieport, content scales for device width and initial scale sets initial zoom upon loading the page -->
-
-
+  
     <!-- EXERCISE 1:
     Specify the title, the charset (UTF-8) and the viewport of the page.
     -->
+  <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
       /* EXERCISE 2:  
        Create a CSS class for the task list with a diverse background
        Create a CSS class for the task list item with a border, a bold text and a bigger font size
        Style every button of the page to be bigger
+
+
     */
-    .taskBackground {
-      background-color: rgb(97, 213, 248);
-      background-size: 500px;
+
+    #myTaskList {
+      background-color: rgba(255, 255, 255, 0.377);
+      border-style: bold;
+      border-color: rgb(255, 255, 255);
+      margin: 50px 400px 50px 400px;
+      
+    }
+
+    #myTaskList li {
       border-style: dashed;
-      border-color: cyan;
-    }
-
-    .taskItem {
-      border-style: solid;
       font-weight: bold;
-      font-size: 40px;
+      font-size: 20px;
+      margin: 20px 40px 20px 40px;
+      color: rgb(168, 46, 238);
+      border-color: rgb(255, 255, 255)
+    }
+    /* li child of ID myTaskList */
+
+    body {
+      text-align: center;
+      background-color: rgba(0, 47, 255, 0.144);
     }
 
-    .textStyling {
-      text-align: center
-    }
-
-    .button {
-      background-color:rgb(255, 255, 255);
+    input[type="button"] {
+      background-color:rgb(105, 168, 240);
       border: solid;
+      border-color:rgb(222, 240, 123);
       color: white;
       text-align: center;
       font-size: 20px;
-      padding: 25px 40px;
+      padding: 10px 20px;
 }
 
     </style>
@@ -61,34 +68,37 @@ The have a list of tasks and can, at any time, add a new one, delete one or sort
 
     <span>You can add any task you like by writing it in the specified field and
       then press "Add new task"</span>
-    <br /><br />
- 
-    <input type="text" id="newTask" onchange="readText"/>
-    <input type="button" value="Add New Task" id="addTaskButton" onclick="addNewTask" />
+      <br /><br />
+
+    <input type="text" id="newTask" />
+    <input type="button" value="Add new Task" onclick="addNewTask();confirmAction()" />
 
     <!-- EXERCISE 3
         Create a button "Remove Last Task" to trigger the method "removeLast"
         -->
-    <input type="button" value="Remove Last Task" onclick="removeLastTask()" />
 
+    <input type="button" value="Remove Last Task" onclick="removeLast()" />
 
     <!-- EXERCISE 4
         Create a button "Remove First Task" to trigger the method "removeFirst"
         -->
-    <input type="button" value="Remove First Task" onclick="removeFirstTask()" />
+    <input type="button" value="Remove Last Task" onclick="removeFirst()" />
+    
+    <hr />
 
+    <hr />
 
     <ul id="myTaskList"></ul>
 
     <hr />
-<!-- thematic break in html -->
 
     <input type="color" placeholder="Color" id="colorPicker" />
     <input
       type="button"
-      value="Change task background colour!"
+      value="Change task background"
       onclick="changeTaskBackgroundColor()"
     />
+    <hr />
 
     <hr />
 
@@ -101,50 +111,42 @@ The have a list of tasks and can, at any time, add a new one, delete one or sort
                 - Use document.getElementById to get the UL item and the input text
                 - Use the document.createElement to create the new List Item
                 - Append the child to the UL
+
             */
-           const taskList = document.getElementById(myTaskList);
-           console.log(taskList)
-          //  ul list of tasks added
-          const taskButtonAdd = document.getElementById(addTaskButton);
-          //  button for adding a task
-           
-           
 
-           const addConfirmTaskP = document.createElement("p");
-           addConfirmTaskP.id += "textConfirm"
-          //  create element for adding text output tag to page to contain text
+            const taskListLog = document.getElementById("myTaskList")
+            const inputText = document.getElementById("newTask")
+            
 
-           addTaskButton.addEventListener('click', addNewTask); //check
+            function addNewTask(){
+              
+              const newItem = document.createElement("li");
+
+              const inputTextTaskA = inputText.value
+              newItem.innerHTML = inputTextTaskA.toUpperCase();
+
+              taskListLog.appendChild(newItem)
+              console.log(inputText.value);
+
+            }
+
+            const confirmSpan = document.createElement("span");
+
+            function confirmAction(){
+              
+
+              const inputTextTaskB = inputText.value
+              showTask = inputTextTaskB.toUpperCase()
 
 
-           function readText() {
-            let taskTextBox = document.getElementById(newTask).value;
-          
-           console.log(taskTextBox)
+              confirmText = showTask + '  ' + ': This task has been added to the list.';
+              console.log(confirmText)
 
-           }
+              confirmSpan.innerHTML = confirmText
 
+              document.body.insertBefore(confirmSpan, taskListLog);
 
-          function addNewTask(){
-          //  text input into text box on page
-
-            let newListItem = document.createElement("li")
-            taskList.appendChild(newListItem)
-            //  add task to list
-             console.log("New Task:", innerText);
-
-            const taskListArray = document.getElementsByTagName("li")
-            const x = taskListArray.length
-
-            taskListArray[x] = innerText
-
-             const confirmTask = document.createTextNode(innerText, ": This task has been added to list.")
-            //  this is the output to show the task input
-             const confirmTaskArray = document.getElementsByID(textConfirm)
-             confirmTaskArray[0].append(confirmTask)
-           }
-
-      
+            }
 
       /* EXERCISE 6: 
                 Create a method "removeLast" which removes the last item from the task list
