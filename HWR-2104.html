@@ -77,7 +77,7 @@ The have a list of tasks and can, at any time, add a new one, delete one or sort
         Create a button "Remove Last Task" to trigger the method "removeLast"
         -->
 
-    <input type="button" value="Remove Last Task" onclick="removeLast()" />
+    <input type="button" value="Remove Last Task" onclick="removeLast(); confirmActionRemove()" />
 
     <!-- EXERCISE 4
         Create a button "Remove First Task" to trigger the method "removeFirst"
@@ -151,6 +151,42 @@ The have a list of tasks and can, at any time, add a new one, delete one or sort
       /* EXERCISE 6: 
                 Create a method "removeLast" which removes the last item from the task list
             */
+            // const taskListLog = document.getElementById("myTaskList")
+            // const inputText = document.getElementById("newTask")
+            // const confirmSpan = document.createElement("span");
+
+
+            
+
+            function removeLast(){
+
+              const lastLI = taskListLog.lastChild
+
+              let byeTask = taskListLog.removeChild(lastLI);
+
+              }
+
+
+             
+
+
+            function confirmActionRemove(){
+              
+              
+              const showTask = byeTask.innerHTML;
+             
+              confirmTextRemove = showTask + '  ' + ': This task has been removed from the list.';
+              console.log(confirmTextRemove)
+
+              confirmSpan.innerHTML = confirmTextRemove
+
+            }
+
+
+           
+
+
+
 
       /* EXERCISE 7: 
                 Create a method "removeFirst" which removes the first item from the task list
